@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import "/App.css";
-import ToDoList from "../components/Dashboard/ToDoList";
-import WeatherDashboard from "../components/Dashboard/WeatherDashboard";
-import ExpenseTracker from "../components/Dashboard/ExpenseTracker";
-import ChatRoom from "../components/Dashboard/ChatRoom";
+import "./App.css";
+import ToDoList from "./components/Dashboard/ToDoList";
+import WeatherDashboard from "./components/Dashboard/WeatherDashboard";
+import ExpenseTracker from "./components/Dashboard/ExpenseTracker";
+import ChatRoom from "./components/Dashboard/ChatRoom";
 
 function App() {
 	const [email, setEmail] = useState("");

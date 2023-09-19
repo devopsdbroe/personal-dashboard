@@ -12,7 +12,7 @@ const WeatherDashboard = () => {
 
 			try {
 				const response = await fetch(
-					`http://api.weatherstack.com/current?access_key=${API_KEY}&query=${city}`
+					`http://api.weatherstack.com/current?access_key=${API_KEY}&query=${location}`
 				);
 				const data = await response.json();
 

@@ -10,7 +10,7 @@ const ToDoList = () => {
 		setInput("");
 	};
 
-	const removeTodo = (input) => {
+	const removeTodo = (index) => {
 		const newTodos = todos.filter((_, i) => i !== index);
 		setTodos(newTodos);
 	};
