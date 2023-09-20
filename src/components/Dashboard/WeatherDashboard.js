@@ -1,31 +1,25 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const WeatherDashboard = () => {
 	const [location, setLocation] = useState("");
 	const [weatherData, setWeatherData] = useState(null);
 
-	const API_KEY = "cedbeead1f514e098de0134e9809b8d2";
+	const API_KEY = "09db29f92f681d390dc91696db57948a";
 
-	useEffect(() => {
-		const fetchWeather = async () => {
-			if (location.trim() === "") return;
+	const fetchWeather = async () => {
+		if (location.trim() === "") return;
 
-			try {
-				const response = await fetch(
-					`http://api.weatherstack.com/current?access_key=${API_KEY}&query=${location}`
-				);
-				const data = await response.json();
-
-				if (data.success !== false) {
-					setWeatherData(data);
-				}
-			} catch (error) {
-				console.error("Error fetching weather data:", error);
-			}
-		};
-
-		fetchWeather();
-	}, [location]);
+		try {
+			const response = await axios.get(
+				`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${API_KEY}&units=metric`
+			);
+			console.log(response.data);
+			setWeatherData(response.data);
+		} catch (error) {
+			console.error("Error fetching weather data:", error);
+		}
+	};
 
 	return (
 		<div>
@@ -36,15 +30,15 @@ const WeatherDashboard = () => {
 				value={location}
 				onChange={(e) => setLocation(e.target.value)}
 			/>
-			<button onClick={(e) => setLocation(location)}>Get Weather</button>
+			<button onClick={fetchWeather}>Get Weather</button>
 
 			{weatherData && (
 				<div>
 					<h3>
-						{weatherData.location.name}, {weatherData.location.country}
+						{weatherData.name}, {weatherData.sys.country}
 					</h3>
-					<p>Temperature: {weatherData.current.temperature}°C</p>
-					<p>{weatherData.current.weather_descriptions[0]}</p>
+					<p>Temperature: {weatherData.main.temp}°C</p>
+					<p>{weatherData.weather[0].description}</p>
 				</div>
 			)}
 		</div>
