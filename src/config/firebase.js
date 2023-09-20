@@ -1,4 +1,4 @@
-import { initilizeApp } from "firebase/app";
+import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
 	apiKey: "AIzaSyAXprhJ11IS-y2yhVuABoAAOuHLBDOf4Hk",
@@ -9,6 +9,6 @@ const firebaseConfig = {
 	appId: "1:128472369292:web:d8e57c45dc2a3f8a1fd3a9",
 };
 
-const app = initilizeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
 export default app;

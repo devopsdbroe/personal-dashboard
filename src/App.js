@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./config/firebase";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import "./App.css";
 import ToDoList from "./components/Dashboard/ToDoList";
