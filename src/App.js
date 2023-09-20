@@ -6,6 +6,8 @@ import ToDoList from "./components/Dashboard/ToDoList";
 import WeatherDashboard from "./components/Dashboard/WeatherDashboard";
 import ExpenseTracker from "./components/Dashboard/ExpenseTracker";
 import ChatRoom from "./components/Dashboard/ChatRoom";
+import { DarkModeProvider } from "./contexts/DarkModeContext";
+import DarkModeToggle from "./components/Dashboard/DarkModeToggle";
 
 function App() {
 	const [email, setEmail] = useState("");
@@ -48,10 +50,13 @@ function App() {
 				</div>
 			) : (
 				<div>
-					<ToDoList />
-					<WeatherDashboard />
-					<ExpenseTracker />
-					<ChatRoom />
+					<DarkModeProvider>
+						<ToDoList />
+						<WeatherDashboard />
+						<ExpenseTracker />
+						<ChatRoom />
+						<DarkModeToggle />
+					</DarkModeProvider>
 				</div>
 			)}
 		</div>

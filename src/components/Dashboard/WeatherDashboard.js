@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 const WeatherDashboard = () => {
@@ -14,7 +14,6 @@ const WeatherDashboard = () => {
 			const response = await axios.get(
 				`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${API_KEY}&units=metric`
 			);
-			console.log(response.data);
 			setWeatherData(response.data);
 		} catch (error) {
 			console.error("Error fetching weather data:", error);
