@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./config/firebase";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import {
+	getAuth,
+	signInWithEmailAndPassword,
+	onAuthStateChanged,
+} from "firebase/auth";
 import "./App.css";
 import ToDoList from "./components/Dashboard/ToDoList";
 import WeatherDashboard from "./components/Dashboard/WeatherDashboard";
@@ -34,6 +38,20 @@ function App() {
 			console.error("Error signing in:", error);
 		}
 	};
+
+	useEffect(() => {
+		const auth = getAuth();
+
+		const unsubscribe = onAuthStateChanged(auth, (user) => {
+			if (user) {
+				setIsLoggedIn(true);
+			} else {
+				setIsLoggedIn(false);
+			}
+		});
+
+		return () => unsubscribe();
+	}, []);
 
 	return (
 		<div className='App'>
