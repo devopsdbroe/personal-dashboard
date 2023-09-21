@@ -5,6 +5,7 @@ import {
 	signInWithEmailAndPassword,
 	onAuthStateChanged,
 	signOut,
+	createUserWithEmailAndPassword,
 } from "firebase/auth";
 import "./App.css";
 import ToDoList from "./components/Dashboard/ToDoList";
@@ -21,6 +22,8 @@ function App() {
 
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [registerEmail, setRegisterEmail] = useState("");
+	const [registerPassword, setRegisterPassword] = useState("");
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [logoutTimer, setLogoutTimer] = useState(null);
 
@@ -71,6 +74,22 @@ function App() {
 		}
 	};
 
+	const handleRegistration = async () => {
+		const auth = getAuth();
+
+		try {
+			const userCredential = await createUserWithEmailAndPassword(
+				auth,
+				registerEmail,
+				registerPassword
+			);
+			const user = userCredential.user;
+			console.log("User registered:", user);
+		} catch (error) {
+			console.error("Error during registration:", error);
+		}
+	};
+
 	const handleLogout = () => {
 		const auth = getAuth();
 		signOut(auth);
@@ -93,6 +112,17 @@ function App() {
 						onChange={(e) => setPassword(e.target.value)}
 					/>
 					<button onClick={handleLogin}>Login</button>
+					<input
+						type='email'
+						placeholder='Register Email'
+						onChange={(e) => setRegisterEmail(e.target.value)}
+					/>
+					<input
+						type='password'
+						placeholder='Register Password'
+						onChange={(e) => setRegisterPassword(e.target.value)}
+					/>
+					<button onClick={handleRegistration}>Register</button>
 				</div>
 			) : (
 				<div>
