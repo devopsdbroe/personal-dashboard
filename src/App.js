@@ -4,6 +4,7 @@ import {
 	getAuth,
 	signInWithEmailAndPassword,
 	onAuthStateChanged,
+	signOut,
 } from "firebase/auth";
 import "./App.css";
 import ToDoList from "./components/Dashboard/ToDoList";
@@ -21,6 +22,37 @@ function App() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const [logoutTimer, setLogoutTimer] = useState(null);
+
+	useEffect(() => {
+		const auth = getAuth();
+
+		onAuthStateChanged(auth, (user) => {
+			if (user) {
+				setIsLoggedIn(true);
+			} else {
+				setIsLoggedIn(false);
+			}
+		});
+
+		const resetTimer = () => {
+			if (logoutTimer) clearTimeout(logoutTimer);
+			setLogoutTimer(
+				setTimeout(() => {
+					handleLogout();
+				}, 5 * 60 * 1000)
+			);
+		};
+
+		window.addEventListener("mousemove", resetTimer);
+		window.addEventListener("keypress", resetTimer);
+
+		return () => {
+			window.removeEventListener("mousemove", resetTimer);
+			window.removeEventListener("keypress", resetTimer);
+			if (logoutTimer) clearTimeout(logoutTimer);
+		};
+	}, [logoutTimer]);
 
 	const handleLogin = async () => {
 		const auth = getAuth();
@@ -39,19 +71,11 @@ function App() {
 		}
 	};
 
-	useEffect(() => {
+	const handleLogout = () => {
 		const auth = getAuth();
-
-		const unsubscribe = onAuthStateChanged(auth, (user) => {
-			if (user) {
-				setIsLoggedIn(true);
-			} else {
-				setIsLoggedIn(false);
-			}
-		});
-
-		return () => unsubscribe();
-	}, []);
+		signOut(auth);
+		setIsLoggedIn(false);
+	};
 
 	return (
 		<div className='App'>
@@ -80,6 +104,7 @@ function App() {
 						<DarkModeToggle />
 						<LanguageSwitcher />
 					</DarkModeProvider>
+					<button onClick={handleLogout}>Sign Out</button>
 				</div>
 			)}
 		</div>
