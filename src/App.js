@@ -8,8 +8,12 @@ import ExpenseTracker from "./components/Dashboard/ExpenseTracker";
 import ChatRoom from "./components/Dashboard/ChatRoom";
 import { DarkModeProvider } from "./contexts/DarkModeContext";
 import DarkModeToggle from "./components/Dashboard/DarkModeToggle";
+import { useTranslation } from "react-i18next";
+import LanguageSwitcher from "./components/common/LanguageSwitcher";
 
 function App() {
+	const { t } = useTranslation();
+
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -32,18 +36,18 @@ function App() {
 	};
 
 	return (
-		<div className="App">
-			<h1>Personal Dashboard</h1>
+		<div className='App'>
+			<h1>{t("personalDashboard")}</h1>
 			{!isLoggedIn ? (
 				<div>
 					<input
-						type="email"
-						placeholder="Email"
+						type='email'
+						placeholder='Email'
 						onChange={(e) => setEmail(e.target.value)}
 					/>
 					<input
-						type="password"
-						placeholder="Password"
+						type='password'
+						placeholder='Password'
 						onChange={(e) => setPassword(e.target.value)}
 					/>
 					<button onClick={handleLogin}>Login</button>
@@ -56,6 +60,7 @@ function App() {
 						<ExpenseTracker />
 						<ChatRoom />
 						<DarkModeToggle />
+						<LanguageSwitcher />
 					</DarkModeProvider>
 				</div>
 			)}
