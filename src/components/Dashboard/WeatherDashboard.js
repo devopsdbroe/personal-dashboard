@@ -5,14 +5,14 @@ const WeatherDashboard = () => {
 	const [location, setLocation] = useState("");
 	const [weatherData, setWeatherData] = useState(null);
 
-	const API_KEY = "09db29f92f681d390dc91696db57948a";
+	const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
 
 	const fetchWeather = async () => {
 		if (location.trim() === "") return;
 
 		try {
 			const response = await axios.get(
-				`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${API_KEY}&units=metric`
+				`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}&units=metric`
 			);
 			setWeatherData(response.data);
 		} catch (error) {
@@ -24,8 +24,8 @@ const WeatherDashboard = () => {
 		<div>
 			<h2>Weather Dashboard</h2>
 			<input
-				type="text"
-				placeholder="Enter Location"
+				type='text'
+				placeholder='Enter Location'
 				value={location}
 				onChange={(e) => setLocation(e.target.value)}
 			/>
