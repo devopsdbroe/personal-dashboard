@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { io } from "socket.io-client";
 
-const socket = io("http://localhost:3000");
+const socket = io("http://localhost:3001");
 
 const ChatRoom = () => {
 	const [message, setMessage] = useState(""); // State for the current message input
@@ -29,8 +29,8 @@ const ChatRoom = () => {
 			<h2>Chat Room</h2>
 			<div>
 				<input
-					type="text"
-					placeholder="Your message"
+					type='text'
+					placeholder='Your message'
 					value={message}
 					onChange={(e) => setMessage(e.target.value)}
 				/>
