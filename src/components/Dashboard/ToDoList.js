@@ -3,11 +3,18 @@ import React, { useState } from "react";
 const ToDoList = () => {
 	const [input, setInput] = useState("");
 	const [todos, setTodos] = useState([]);
+	const [filter, setFilter] = useState("");
 
 	const addTodo = () => {
 		if (input.trim() === "") return;
-		setTodos([...todos, input]);
+		setTodos([...todos, { text: input, completed: false }]);
 		setInput("");
+	};
+
+	const toggleTodo = (index) => {
+		const newTodos = [...todos];
+		newTodos[index].completed = !newTodos[index].completed;
+		setTodos(newTodos);
 	};
 
 	const removeTodo = (index) => {
@@ -18,18 +25,35 @@ const ToDoList = () => {
 	return (
 		<div>
 			<input
-				type="text"
+				type='text'
+				value={filter}
+				onChange={(e) => setFilter(e.target.value)}
+			/>
+			<input
+				type='text'
 				value={input}
 				onChange={(e) => setInput(e.target.value)}
 			/>
 			<button onClick={addTodo}>Add</button>
 			<ul>
-				{todos.map((todo, index) => (
-					<li key={index}>
-						{todo}
-						<button onClick={() => removeTodo(index)}>Remove</button>
-					</li>
-				))}
+				{todos
+					.filter((todo) => todo.text.includes(filter))
+					.map((filteredTodo, index) => (
+						<li key={index}>
+							<span
+								style={{
+									textDecoration: filteredTodo.completed
+										? "line-through"
+										: "none",
+								}}
+							>
+								{filteredTodo.text}
+								{""}
+							</span>
+							<button onClick={() => toggleTodo(index)}>Toggle</button>
+							<button onClick={() => removeTodo(index)}>Remove</button>
+						</li>
+					))}
 			</ul>
 		</div>
 	);
