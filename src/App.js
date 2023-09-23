@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import "./config/firebase";
 import {
 	getAuth,
@@ -25,37 +25,41 @@ function App() {
 	const [registerEmail, setRegisterEmail] = useState("");
 	const [registerPassword, setRegisterPassword] = useState("");
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
-	const [logoutTimer, setLogoutTimer] = useState(null);
+	const logoutTimerRef = useRef(null);
+
+	const resetTimer = useCallback(() => {
+		if (logoutTimerRef.current) {
+			clearTimeout(logoutTimerRef.current);
+		}
+
+		logoutTimerRef.current = setTimeout(handleLogout, 5 * 60 * 1000);
+	}, []);
 
 	useEffect(() => {
 		const auth = getAuth();
 
-		onAuthStateChanged(auth, (user) => {
+		const unsubscribeFromAuth = onAuthStateChanged(auth, (user) => {
 			if (user) {
 				setIsLoggedIn(true);
+				resetTimer();
 			} else {
 				setIsLoggedIn(false);
 			}
 		});
 
-		const resetTimer = () => {
-			if (logoutTimer) clearTimeout(logoutTimer);
-			setLogoutTimer(
-				setTimeout(() => {
-					handleLogout();
-				}, 5 * 60 * 1000)
-			);
-		};
-
 		window.addEventListener("mousemove", resetTimer);
 		window.addEventListener("keypress", resetTimer);
 
 		return () => {
+			unsubscribeFromAuth();
+
 			window.removeEventListener("mousemove", resetTimer);
 			window.removeEventListener("keypress", resetTimer);
-			if (logoutTimer) clearTimeout(logoutTimer);
+			if (logoutTimerRef.current) {
+				clearTimeout(logoutTimerRef.current);
+			}
 		};
-	}, [logoutTimer]);
+	}, [resetTimer]);
 
 	const handleLogin = async () => {
 		const auth = getAuth();

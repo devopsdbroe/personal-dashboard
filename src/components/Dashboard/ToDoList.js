@@ -26,11 +26,13 @@ const ToDoList = () => {
 		<div>
 			<input
 				type='text'
+				placeholder='Search'
 				value={filter}
 				onChange={(e) => setFilter(e.target.value)}
 			/>
 			<input
 				type='text'
+				placeholder='Add Items Here'
 				value={input}
 				onChange={(e) => setInput(e.target.value)}
 			/>
