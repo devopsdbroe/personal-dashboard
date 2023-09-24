@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState } from "react";
 import "./config/firebase";
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import { getAuth, signOut } from "firebase/auth";
 import "./App.css";
 import LoginForm from "./components/Auth/LoginForm";
+import useLogoutTimer from "./components/hooks/useLogoutTimer";
 import ToDoList from "./components/Dashboard/ToDoList";
 import RandomQuote from "./components/Dashboard/RandomQuote";
 import WeatherDashboard from "./components/Dashboard/WeatherDashboard";
@@ -17,47 +18,15 @@ function App() {
 	const { t } = useTranslation();
 	const [email, setEmail] = useState("");
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
-	const logoutTimerRef = useRef(null);
-
-	const resetTimer = useCallback(() => {
-		if (logoutTimerRef.current) {
-			clearTimeout(logoutTimerRef.current);
-		}
-
-		logoutTimerRef.current = setTimeout(handleLogout, 5 * 60 * 1000);
-	}, []);
-
-	useEffect(() => {
-		const auth = getAuth();
-
-		const unsubscribeFromAuth = onAuthStateChanged(auth, (user) => {
-			if (user) {
-				setIsLoggedIn(true);
-				resetTimer();
-			} else {
-				setIsLoggedIn(false);
-			}
-		});
-
-		window.addEventListener("mousemove", resetTimer);
-		window.addEventListener("keypress", resetTimer);
-
-		return () => {
-			unsubscribeFromAuth();
-
-			window.removeEventListener("mousemove", resetTimer);
-			window.removeEventListener("keypress", resetTimer);
-			if (logoutTimerRef.current) {
-				clearTimeout(logoutTimerRef.current);
-			}
-		};
-	}, [resetTimer]);
 
 	const handleLogout = () => {
 		const auth = getAuth();
 		signOut(auth);
 		setIsLoggedIn(false);
 	};
+
+	// Custom hook that logs the user out after 5 minutes
+	useLogoutTimer(isLoggedIn, setIsLoggedIn, handleLogout);
 
 	return (
 		<div className='App'>
