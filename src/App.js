@@ -13,6 +13,7 @@ import { DarkModeProvider } from "./contexts/DarkModeContext";
 import DarkModeToggle from "./components/Dashboard/DarkModeToggle";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./components/common/LanguageSwitcher";
+import CountdownTimer from "./components/Dashboard/CountdownTimer";
 
 function App() {
 	const { t } = useTranslation();
@@ -43,6 +44,7 @@ function App() {
 						<ChatRoom userEmail={isLoggedIn ? email : null} />
 						<DarkModeToggle />
 						<LanguageSwitcher />
+						<CountdownTimer />
 					</DarkModeProvider>
 					<button onClick={handleLogout}>Sign Out</button>
 				</div>
