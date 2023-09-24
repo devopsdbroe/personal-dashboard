@@ -3,7 +3,7 @@ import { io } from "socket.io-client";
 
 const socket = io("http://localhost:3001");
 
-const ChatRoom = () => {
+const ChatRoom = ({ userEmail }) => {
 	const [message, setMessage] = useState(""); // State for the current message input
 	const [messages, setMessages] = useState([]); // State for storing messages
 
@@ -20,7 +20,7 @@ const ChatRoom = () => {
 
 	// Function to send a message
 	const sendMessage = () => {
-		socket.emit("chat message", message);
+		socket.emit("chat message", { content: message, email: userEmail });
 		setMessage("");
 	};
 
@@ -38,7 +38,9 @@ const ChatRoom = () => {
 			</div>
 			<ul>
 				{messages.map((msg, index) => (
-					<li key={index}>{msg}</li>
+					<li key={index}>
+						<strong>{msg.email}:</strong> {msg.content}
+					</li>
 				))}
 			</ul>
 		</div>

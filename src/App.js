@@ -1,13 +1,8 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import "./config/firebase";
-import {
-	getAuth,
-	signInWithEmailAndPassword,
-	onAuthStateChanged,
-	signOut,
-	createUserWithEmailAndPassword,
-} from "firebase/auth";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import "./App.css";
+import LoginForm from "./components/Auth/LoginForm";
 import ToDoList from "./components/Dashboard/ToDoList";
 import WeatherDashboard from "./components/Dashboard/WeatherDashboard";
 import ExpenseTracker from "./components/Dashboard/ExpenseTracker";
@@ -19,11 +14,7 @@ import LanguageSwitcher from "./components/common/LanguageSwitcher";
 
 function App() {
 	const { t } = useTranslation();
-
 	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
-	const [registerEmail, setRegisterEmail] = useState("");
-	const [registerPassword, setRegisterPassword] = useState("");
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const logoutTimerRef = useRef(null);
 
@@ -61,39 +52,6 @@ function App() {
 		};
 	}, [resetTimer]);
 
-	const handleLogin = async () => {
-		const auth = getAuth();
-
-		try {
-			const userCredential = await signInWithEmailAndPassword(
-				auth,
-				email,
-				password
-			);
-			const user = userCredential.user;
-			console.log("User logged in:", user);
-			setIsLoggedIn(true);
-		} catch (error) {
-			console.error("Error signing in:", error);
-		}
-	};
-
-	const handleRegistration = async () => {
-		const auth = getAuth();
-
-		try {
-			const userCredential = await createUserWithEmailAndPassword(
-				auth,
-				registerEmail,
-				registerPassword
-			);
-			const user = userCredential.user;
-			console.log("User registered:", user);
-		} catch (error) {
-			console.error("Error during registration:", error);
-		}
-	};
-
 	const handleLogout = () => {
 		const auth = getAuth();
 		signOut(auth);
@@ -104,37 +62,14 @@ function App() {
 		<div className='App'>
 			<h1>{t("personalDashboard")}</h1>
 			{!isLoggedIn ? (
-				<div>
-					<input
-						type='email'
-						placeholder='Email'
-						onChange={(e) => setEmail(e.target.value)}
-					/>
-					<input
-						type='password'
-						placeholder='Password'
-						onChange={(e) => setPassword(e.target.value)}
-					/>
-					<button onClick={handleLogin}>Login</button>
-					<input
-						type='email'
-						placeholder='Register Email'
-						onChange={(e) => setRegisterEmail(e.target.value)}
-					/>
-					<input
-						type='password'
-						placeholder='Register Password'
-						onChange={(e) => setRegisterPassword(e.target.value)}
-					/>
-					<button onClick={handleRegistration}>Register</button>
-				</div>
+				<LoginForm email={email} setEmail={setEmail} onLogin={setIsLoggedIn} />
 			) : (
 				<div>
 					<DarkModeProvider>
 						<ToDoList />
 						<WeatherDashboard />
 						<ExpenseTracker />
-						<ChatRoom />
+						<ChatRoom userEmail={isLoggedIn ? email : null} />
 						<DarkModeToggle />
 						<LanguageSwitcher />
 					</DarkModeProvider>
