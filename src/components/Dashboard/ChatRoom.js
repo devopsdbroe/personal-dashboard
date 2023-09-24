@@ -10,16 +10,17 @@ const ChatRoom = ({ userEmail }) => {
 	// Listening to 'chat message' event from the server
 	useEffect(() => {
 		socket.on("chat message", (msg) => {
-			setMessages([...messages, msg]);
+			setMessages((prevMessages) => [...prevMessages, msg]);
 		});
 
 		return () => {
 			socket.off("chat message");
 		};
-	}, [messages]);
+	}, []);
 
 	// Function to send a message
-	const sendMessage = () => {
+	const sendMessage = (e) => {
+		e.preventDefault();
 		socket.emit("chat message", { content: message, email: userEmail });
 		setMessage("");
 	};
@@ -28,13 +29,15 @@ const ChatRoom = ({ userEmail }) => {
 		<div>
 			<h2>Chat Room</h2>
 			<div>
-				<input
-					type='text'
-					placeholder='Your message'
-					value={message}
-					onChange={(e) => setMessage(e.target.value)}
-				/>
-				<button onClick={sendMessage}>Send</button>
+				<form onSubmit={sendMessage}>
+					<input
+						type='text'
+						placeholder='Your message'
+						value={message}
+						onChange={(e) => setMessage(e.target.value)}
+					/>
+					<button type='submit'>Send</button>
+				</form>
 			</div>
 			<ul>
 				{messages.map((msg, index) => (

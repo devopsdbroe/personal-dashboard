@@ -6,7 +6,8 @@ const ToDoList = () => {
 	const [todos, setTodos] = useState([]);
 	const [filter, setFilter] = useState("");
 
-	const addTodo = () => {
+	const addTodo = (e) => {
+		e.preventDefault();
 		if (input.trim() === "") return;
 		setTodos([...todos, { text: input, completed: false }]);
 		setInput("");
@@ -39,13 +40,15 @@ const ToDoList = () => {
 				value={filter}
 				onChange={(e) => setFilter(e.target.value)}
 			/>
-			<input
-				type='text'
-				placeholder='Add Items Here'
-				value={input}
-				onChange={(e) => setInput(e.target.value)}
-			/>
-			<button onClick={addTodo}>Add</button>
+			<form onSubmit={addTodo}>
+				<input
+					type='text'
+					placeholder='Add Items Here'
+					value={input}
+					onChange={(e) => setInput(e.target.value)}
+				/>
+				<button type='submit'>Add</button>
+			</form>
 			<DragDropContext onDragEnd={handleDragEnd}>
 				<Droppable droppableId='todoList'>
 					{(provided) => (

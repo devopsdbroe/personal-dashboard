@@ -8,7 +8,8 @@ const WeatherDashboard = () => {
 
 	const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
 
-	const fetchWeather = async () => {
+	const fetchWeather = async (e) => {
+		e.preventDefault();
 		if (city.trim() === "" || state.trim() === "") return;
 
 		try {
@@ -24,19 +25,21 @@ const WeatherDashboard = () => {
 	return (
 		<div>
 			<h2>Weather Dashboard</h2>
-			<input
-				type='text'
-				placeholder='City'
-				value={city}
-				onChange={(e) => setCity(e.target.value)}
-			/>
-			<input
-				type='text'
-				placeholder='State'
-				value={state}
-				onChange={(e) => setState(e.target.value)}
-			/>
-			<button onClick={fetchWeather}>Get Weather</button>
+			<form onSubmit={fetchWeather}>
+				<input
+					type='text'
+					placeholder='City'
+					value={city}
+					onChange={(e) => setCity(e.target.value)}
+				/>
+				<input
+					type='text'
+					placeholder='State'
+					value={state}
+					onChange={(e) => setState(e.target.value)}
+				/>
+				<button type='submit'>Get Weather</button>
+			</form>
 
 			{weatherData && (
 				<div>
