@@ -2,17 +2,18 @@ import React, { useState } from "react";
 import axios from "axios";
 
 const WeatherDashboard = () => {
-	const [location, setLocation] = useState("");
+	const [city, setCity] = useState("");
+	const [state, setState] = useState("");
 	const [weatherData, setWeatherData] = useState(null);
 
 	const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
 
 	const fetchWeather = async () => {
-		if (location.trim() === "") return;
+		if (city.trim() === "" || state.trim() === "") return;
 
 		try {
 			const response = await axios.get(
-				`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}&units=metric`
+				`https://api.openweathermap.org/data/2.5/weather?q=${city},${state}&appid=${apiKey}&units=imperial`
 			);
 			setWeatherData(response.data);
 		} catch (error) {
@@ -25,18 +26,24 @@ const WeatherDashboard = () => {
 			<h2>Weather Dashboard</h2>
 			<input
 				type='text'
-				placeholder='Enter Location'
-				value={location}
-				onChange={(e) => setLocation(e.target.value)}
+				placeholder='City'
+				value={city}
+				onChange={(e) => setCity(e.target.value)}
+			/>
+			<input
+				type='text'
+				placeholder='State'
+				value={state}
+				onChange={(e) => setState(e.target.value)}
 			/>
 			<button onClick={fetchWeather}>Get Weather</button>
 
 			{weatherData && (
 				<div>
 					<h3>
-						{weatherData.name}, {weatherData.sys.country}
+						{weatherData.name}, {state}
 					</h3>
-					<p>Temperature: {weatherData.main.temp}°C</p>
+					<p>Temperature: {weatherData.main.temp}°F</p>
 					<p>{weatherData.weather[0].description}</p>
 				</div>
 			)}
