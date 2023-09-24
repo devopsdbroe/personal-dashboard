@@ -4,6 +4,7 @@ import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import "./App.css";
 import LoginForm from "./components/Auth/LoginForm";
 import ToDoList from "./components/Dashboard/ToDoList";
+import RandomQuote from "./components/Dashboard/RandomQuote";
 import WeatherDashboard from "./components/Dashboard/WeatherDashboard";
 import ExpenseTracker from "./components/Dashboard/ExpenseTracker";
 import ChatRoom from "./components/Dashboard/ChatRoom";
@@ -67,6 +68,7 @@ function App() {
 				<div>
 					<DarkModeProvider>
 						<ToDoList />
+						<RandomQuote />
 						<WeatherDashboard />
 						<ExpenseTracker />
 						<ChatRoom userEmail={isLoggedIn ? email : null} />
