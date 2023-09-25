@@ -1,0 +1,63 @@
+/* WeatherDashboard.css */
+.weather-dashboard {
+	font-family: Arial, sans-serif;
+	max-width: 600px;
+	margin: 50px auto;
+	padding: 20px;
+	border: 1px solid #e0e0e0;
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+	border-radius: 4px;
+}
+
+.weather-dashboard h2 {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.weather-dashboard form {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+.weather-dashboard input[type="text"] {
+	flex: 1;
+	padding: 10px;
+	margin-right: 10px;
+	border: 1px solid #e0e0e0;
+	border-radius: 4px;
+	width: calc(50% - 10px); /* Subtract the margin */
+	box-sizing: border-box;
+	font-size: 16px;
+	margin-bottom: 10px;
+}
+
+.weather-dashboard button {
+	background-color: #007bff;
+	color: white;
+	padding: 10px 15px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background-color 0.2s;
+	width: 100%;
+}
+
+.weather-dashboard button:hover {
+	background-color: #0056b3;
+}
+
+.weather-dashboard div {
+	margin-top: 20px;
+}
+
+.weather-dashboard h3 {
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+.weather-dashboard p {
+	font-size: 18px;
+	text-align: center;
+	margin-bottom: 10px;
+}

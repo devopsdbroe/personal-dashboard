@@ -4,6 +4,7 @@ import {
 	signInWithEmailAndPassword,
 	createUserWithEmailAndPassword,
 } from "firebase/auth";
+import "./LoginForm.css";
 
 const LoginForm = ({ email, setEmail, onLogin }) => {
 	const [password, setPassword] = useState("");
@@ -47,8 +48,8 @@ const LoginForm = ({ email, setEmail, onLogin }) => {
 	};
 
 	return (
-		<div>
-			<form onSubmit={handleLogin}>
+		<div className='login-form-container'>
+			<form className='login-form' onSubmit={handleLogin}>
 				<input
 					type='email'
 					placeholder='Email'
@@ -63,7 +64,8 @@ const LoginForm = ({ email, setEmail, onLogin }) => {
 				/>
 				<button type='submit'>Sign In</button>
 			</form>
-			<form onSubmit={handleRegistration}>
+			<h2>Not a member? Register here!</h2>
+			<form className='register-form' onSubmit={handleRegistration}>
 				<input
 					type='email'
 					placeholder='Register Email'

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import "./ToDoList.css";
 
 const ToDoList = () => {
 	const [input, setInput] = useState("");
@@ -45,7 +46,7 @@ const ToDoList = () => {
 	};
 
 	return (
-		<div>
+		<div className='todo-container'>
 			<div>
 				<label>Filter: </label>
 				<select

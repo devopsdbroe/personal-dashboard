@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import "./CountdownTimer.css";
 
 const CountdownTimer = () => {
 	const [time, setTime] = useState(0);
@@ -32,7 +33,7 @@ const CountdownTimer = () => {
 	};
 
 	return (
-		<div>
+		<div className='timer-container'>
 			<div className='timer'>
 				<span>
 					{Math.floor(time / 60)

@@ -14,7 +14,6 @@ import DarkModeToggle from "./components/Dashboard/DarkModeToggle";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./components/common/LanguageSwitcher";
 import CountdownTimer from "./components/Dashboard/CountdownTimer";
-import Header from "./components/Dashboard/Header";
 
 function App() {
 	const { t } = useTranslation();
@@ -53,22 +52,39 @@ function App() {
 	return (
 		<div className='App'>
 			<h1>{t("personalDashboard")}</h1>
+
+			{isLoggedIn && (
+				<>
+					<button className='logout-button' onClick={handleLogout}>
+						Sign Out
+					</button>
+					<div className='utilities'>
+						<DarkModeProvider>
+							<DarkModeToggle />
+							<LanguageSwitcher />
+						</DarkModeProvider>
+					</div>
+				</>
+			)}
+
 			{!isLoggedIn ? (
-				<LoginForm email={email} setEmail={setEmail} onLogin={setIsLoggedIn} />
+				<div className='login'>
+					<LoginForm
+						email={email}
+						setEmail={setEmail}
+						onLogin={setIsLoggedIn}
+					/>
+				</div>
 			) : (
-				<div>
+				<div className='container'>
 					<DarkModeProvider>
-						<Header />
 						<ToDoList />
 						<RandomQuote />
 						<WeatherDashboard />
 						<ExpenseTracker />
 						<ChatRoom userEmail={isLoggedIn ? email : null} />
-						<DarkModeToggle />
-						<LanguageSwitcher />
 						<CountdownTimer />
 					</DarkModeProvider>
-					<button onClick={handleLogout}>Sign Out</button>
 				</div>
 			)}
 		</div>

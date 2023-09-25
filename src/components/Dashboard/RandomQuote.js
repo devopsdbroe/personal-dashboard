@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./RandomQuote.css";
 
 const quotes = [
 	"Life is what happens when you're busy making other plans.",
@@ -17,7 +18,7 @@ const RandomQuote = () => {
 	};
 
 	return (
-		<div>
+		<div className='quote-container'>
 			<button onClick={pickRandomQuote}>Generate Random Quote</button>
 			<p>{quote}</p>
 		</div>

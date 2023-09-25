@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "./WeatherDashboard.css";
 
 const WeatherDashboard = () => {
 	const [city, setCity] = useState("");
@@ -23,7 +24,7 @@ const WeatherDashboard = () => {
 	};
 
 	return (
-		<div>
+		<div className='weather-dashboard'>
 			<h2>Weather Dashboard</h2>
 			<form onSubmit={fetchWeather}>
 				<input

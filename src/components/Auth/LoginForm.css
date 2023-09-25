@@ -1,0 +1,78 @@
+/* Container styling */
+.login-form-container {
+	width: 30%;
+	min-width: 400px;
+	margin: 40px auto;
+	background-color: #f7f9fc;
+	padding: 30px;
+	border-radius: 8px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	transition: all 0.3s ease-in-out;
+}
+
+/* Add a subtle hover effect to container */
+.login-form-container:hover {
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Form styling */
+.login-form,
+.register-form {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+
+/* Input fields styling */
+.login-form input[type="email"],
+.login-form input[type="password"],
+.register-form input[type="email"],
+.register-form input[type="password"] {
+	padding: 12px;
+	border: 1px solid #d1d1d1;
+	border-radius: 4px;
+	font-size: 14px;
+	background-color: #fff;
+	transition: border-color 0.2s ease-in-out;
+}
+
+h2 {
+	margin: 60px 0 20px 0;
+	text-align: center;
+}
+
+/* Input hover and focus effects */
+.login-form input[type="email"]:hover,
+.login-form input[type="password"]:hover,
+.register-form input[type="email"]:hover,
+.register-form input[type="password"]:hover {
+	border-color: #a1a1a1;
+}
+
+.login-form input[type="email"]:focus,
+.login-form input[type="password"]:focus,
+.register-form input[type="email"]:focus,
+.register-form input[type="password"]:focus {
+	border-color: #007bff;
+	outline: none;
+	box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Button styling */
+.login-form button,
+.register-form button {
+	padding: 10px;
+	border: none;
+	border-radius: 4px;
+	background-color: #007bff;
+	color: #ffffff;
+	font-size: 16px;
+	cursor: pointer;
+	transition: background-color 0.3s ease-in-out;
+}
+
+/* Button hover effects */
+.login-form button:hover,
+.register-form button:hover {
+	background-color: #0056b3;
+}

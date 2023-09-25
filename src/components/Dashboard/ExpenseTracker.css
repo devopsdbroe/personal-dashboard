@@ -1,0 +1,61 @@
+/* ExpenseTracker.css */
+.expense-tracker {
+	font-family: Arial, sans-serif;
+	max-width: 600px;
+	margin: 50px auto;
+	padding: 20px;
+	border: 1px solid #e0e0e0;
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+	border-radius: 4px;
+}
+
+.expense-tracker h2 {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.expense-tracker form {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+.expense-tracker input[type="text"] {
+	flex: 1;
+	padding: 10px;
+	margin-right: 10px;
+	border: 1px solid #e0e0e0;
+	border-radius: 4px;
+	width: calc(50% - 10px); /* Subtract the margin */
+	box-sizing: border-box;
+	font-size: 16px;
+	margin-bottom: 10px;
+}
+
+.expense-tracker button {
+	background-color: #ff5733;
+	color: white;
+	padding: 10px 15px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background-color 0.2s;
+	width: 100%;
+}
+
+.expense-tracker button:hover {
+	background-color: #c04329;
+}
+
+.expense-tracker ul {
+	margin-top: 20px;
+}
+
+.expense-tracker li {
+	font-size: 18px;
+	margin-bottom: 10px;
+	background-color: #f6f6f6;
+	padding: 8px;
+	border-radius: 4px;
+	border-left: 4px solid #ff5733;
+}

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./ExpenseTracker.css";
 
 const ExpenseTracker = () => {
 	const [expenses, setExpenses] = useState([]);
@@ -13,7 +14,7 @@ const ExpenseTracker = () => {
 	};
 
 	return (
-		<div>
+		<div className='expense-tracker'>
 			<h2>Expense Tracking</h2>
 
 			{/* Form for submitting a new expense */}
