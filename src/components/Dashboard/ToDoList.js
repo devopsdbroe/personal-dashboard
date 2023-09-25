@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 const ToDoList = () => {
@@ -6,6 +6,17 @@ const ToDoList = () => {
 	const [todos, setTodos] = useState([]);
 	const [filter, setFilter] = useState("");
 	const [viewFilter, setViewFilter] = useState("All"); // Possible values: All, Completed, Pending
+
+	useEffect(() => {
+		const storedTodos = localStorage.getItem("todos");
+		if (storedTodos) {
+			setTodos(JSON.parse(storedTodos));
+		}
+	}, []);
+
+	useEffect(() => {
+		localStorage.setItem("todos", JSON.stringify(todos));
+	}, [todos]);
 
 	const addTodo = (e) => {
 		e.preventDefault();
