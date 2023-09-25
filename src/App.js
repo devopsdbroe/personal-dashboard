@@ -9,8 +9,6 @@ import RandomQuote from "./components/Dashboard/RandomQuote";
 import WeatherDashboard from "./components/Dashboard/WeatherDashboard";
 import ExpenseTracker from "./components/Dashboard/ExpenseTracker";
 import ChatRoom from "./components/Dashboard/ChatRoom";
-import { DarkModeProvider } from "./contexts/DarkModeContext";
-import DarkModeToggle from "./components/Dashboard/DarkModeToggle";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./components/common/LanguageSwitcher";
 import CountdownTimer from "./components/Dashboard/CountdownTimer";
@@ -59,10 +57,7 @@ function App() {
 						Sign Out
 					</button>
 					<div className='utilities'>
-						<DarkModeProvider>
-							<DarkModeToggle />
-							<LanguageSwitcher />
-						</DarkModeProvider>
+						<LanguageSwitcher />
 					</div>
 				</div>
 			)}
@@ -77,14 +72,12 @@ function App() {
 				</div>
 			) : (
 				<div className='container'>
-					<DarkModeProvider>
-						<ToDoList />
-						<RandomQuote />
-						<WeatherDashboard />
-						<ExpenseTracker />
-						<ChatRoom userEmail={isLoggedIn ? email : null} />
-						<CountdownTimer />
-					</DarkModeProvider>
+					<ToDoList />
+					<RandomQuote />
+					<WeatherDashboard />
+					<ExpenseTracker />
+					<ChatRoom userEmail={isLoggedIn ? email : null} />
+					<CountdownTimer />
 				</div>
 			)}
 		</div>
