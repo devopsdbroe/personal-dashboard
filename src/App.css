@@ -31,3 +31,44 @@ h1 {
 	top: 10px;
 	right: 10px;
 }
+
+button {
+	padding: 8px 15px;
+	border: none;
+	border-radius: 4px;
+	font-size: 15px;
+	cursor: pointer;
+	transition: background-color 0.3s ease-in-out;
+}
+
+/* Sign out button styling */
+button.sign-out-btn {
+	background-color: #ff4b5c; /* Red color */
+	color: #ffffff;
+}
+
+button.sign-out-btn:hover {
+	background-color: #e43445; /* Darker red for hover effect */
+}
+
+/* DarkModeToggle button styling */
+button.darkmode-toggle-btn {
+	background-color: #333; /* Dark grey */
+	color: #ffffff;
+	margin-right: 10px; /* Assuming it's beside the language switcher */
+}
+
+button.darkmode-toggle-btn:hover {
+	background-color: #222; /* Even darker grey for hover effect */
+}
+
+/* LanguageSwitcher button styling */
+button.language-switcher-btn {
+	background-color: #007bff; /* Blue */
+	color: #ffffff;
+	margin-right: 20px; /* Assuming it's on the top right */
+}
+
+button.language-switcher-btn:hover {
+	background-color: #0056b3; /* Darker blue for hover effect */
+}

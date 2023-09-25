@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useDarkMode } from "../../contexts/DarkModeContext";
 
 const ToggleButton = styled.button`
-	background-color: ${(props) => (props.$isDarkMode ? "black" : "white")};
+	background-color: ${(props) => (props.$isDarkMode ? "black" : "silver")};
 	color: ${(props) => (props.$isDarkMode ? "white" : "black")};
 `;
 

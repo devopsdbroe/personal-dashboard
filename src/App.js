@@ -54,8 +54,8 @@ function App() {
 			<h1>{t("personalDashboard")}</h1>
 
 			{isLoggedIn && (
-				<>
-					<button className='logout-button' onClick={handleLogout}>
+				<div className='logout-button'>
+					<button className='sign-out-btn' onClick={handleLogout}>
 						Sign Out
 					</button>
 					<div className='utilities'>
@@ -64,7 +64,7 @@ function App() {
 							<LanguageSwitcher />
 						</DarkModeProvider>
 					</div>
-				</>
+				</div>
 			)}
 
 			{!isLoggedIn ? (
