@@ -5,6 +5,7 @@ const CountdownTimer = () => {
 	const [time, setTime] = useState(0);
 	const [isActive, setIsActive] = useState(false);
 	const [inputValue, setInputValue] = useState("");
+	const [errorMessage, setErrorMessage] = useState("");
 
 	useEffect(() => {
 		let interval;
@@ -21,15 +22,25 @@ const CountdownTimer = () => {
 		return () => clearInterval(interval);
 	}, [isActive, time]);
 
+	// Sole purpose is to start timer. Will throw error if no input found
 	const handleStart = (e) => {
 		e.preventDefault();
-		setIsActive(!isActive);
 
-		if (!isActive) {
+		// If input value is empty or zero, set error message and return
+		if (!inputValue || parseInt(inputValue) === 0) {
+			setErrorMessage("Please enter a valid time before starting the timer.");
+			return;
+		} else {
 			setTime(inputValue * 60);
+			setIsActive(true);
+			setInputValue(""); // Clear input only after setting the timer
 		}
 
-		setInputValue("");
+		setErrorMessage(""); // Clear error message if there's a valid input
+	};
+
+	const handlePauseResume = () => {
+		setIsActive(!isActive);
 	};
 
 	return (
@@ -44,15 +55,25 @@ const CountdownTimer = () => {
 				<span>{(time % 60).toString().padStart(2, "0")}</span>
 			</div>
 			<div className='controls'>
+				{/* If error message has a value, show the error */}
+				{errorMessage && <div className='error-message'>{errorMessage}</div>}
 				<form onSubmit={handleStart}>
 					<input
 						type='number'
 						placeholder='Minutes'
 						value={inputValue}
-						onChange={(e) => setInputValue(e.target.value)}
+						onChange={(e) => {
+							setInputValue(e.target.value);
+							setErrorMessage("");
+						}}
 					/>
-					<button type='submit'>{isActive ? "Pause" : "Play"}</button>
+					<button type='submit'>Start</button>
 				</form>
+				{time > 0 && (
+					<button onClick={handlePauseResume}>
+						{isActive ? "Pause" : "Resume"}
+					</button>
+				)}
 				<button onClick={(e) => setTime(0)}>Reset</button>
 			</div>
 		</div>

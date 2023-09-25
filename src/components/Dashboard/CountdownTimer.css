@@ -34,6 +34,7 @@
 	padding: 10px;
 	border: 1px solid #e0e0e0;
 	border-radius: 4px;
+	margin-top: 10px;
 	margin-right: 5px;
 	font-size: 1em;
 }
@@ -48,10 +49,27 @@
 	transition: background-color 0.2s;
 }
 
+.controls button:nth-child(2) {
+	margin-top: 10px;
+}
+
 .controls button:last-child {
-	margin-top: 5px;
+	margin-top: 10px;
 }
 
 .controls button:hover {
 	background-color: #0056b3;
+}
+
+.error-message {
+	color: #d32f2f; /* A shade of red to indicate an error */
+	margin: 10px 0; /* Spacing around the error message */
+	padding: 8px;
+	background-color: #ffebee; /* Light red background */
+	border: 1px solid #d32f2f; /* A border to match the text color */
+	border-radius: 4px; /* Soften the edges for a rounded look */
+	text-align: center; /* Center-align the text */
+	width: 100%; /* Make it span the width of the container */
+	box-sizing: border-box; /* Ensure padding and border don't increase its size */
+	font-size: 0.9em; /* A slightly smaller font size compared to other texts */
 }
