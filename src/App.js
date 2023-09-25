@@ -4,14 +4,14 @@ import { getAuth, signOut } from "firebase/auth";
 import "./App.css";
 import LoginForm from "./components/Auth/LoginForm";
 import useLogoutTimer from "./components/hooks/useLogoutTimer";
-import ToDoList from "./components/Dashboard/ToDoList";
-import RandomQuote from "./components/Dashboard/RandomQuote";
-import WeatherDashboard from "./components/Dashboard/WeatherDashboard";
-import ExpenseTracker from "./components/Dashboard/ExpenseTracker";
-import ChatRoom from "./components/Dashboard/ChatRoom";
+import ToDoList from "./components/Dashboard/ToDoList/ToDoList";
+import RandomQuote from "./components/Dashboard/RandomQuote/RandomQuote";
+import WeatherDashboard from "./components/Dashboard/WeatherDashboard/WeatherDashboard";
+import ExpenseTracker from "./components/Dashboard/ExpenseTracker/ExpenseTracker";
+import ChatRoom from "./components/Dashboard/ChatRoom/ChatRoom";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./components/common/LanguageSwitcher";
-import CountdownTimer from "./components/Dashboard/CountdownTimer";
+import CountdownTimer from "./components/Dashboard/CountdownTimer/CountdownTimer";
 
 function App() {
 	const { t } = useTranslation();
