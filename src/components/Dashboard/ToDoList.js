@@ -5,6 +5,7 @@ const ToDoList = () => {
 	const [input, setInput] = useState("");
 	const [todos, setTodos] = useState([]);
 	const [filter, setFilter] = useState("");
+	const [viewFilter, setViewFilter] = useState("All"); // Possible values: All, Completed, Pending
 
 	const addTodo = (e) => {
 		e.preventDefault();
@@ -34,6 +35,17 @@ const ToDoList = () => {
 
 	return (
 		<div>
+			<div>
+				<label>Filter: </label>
+				<select
+					value={viewFilter}
+					onChange={(e) => setViewFilter(e.target.value)}
+				>
+					<option value='All'>All</option>
+					<option value='Completed'>Completed</option>
+					<option value='Pending'>Pending</option>
+				</select>
+			</div>
 			<input
 				type='text'
 				placeholder='Search'
@@ -54,6 +66,11 @@ const ToDoList = () => {
 					{(provided) => (
 						<ul ref={provided.innerRef} {...provided.droppableProps}>
 							{todos
+								.filter((todo) => {
+									if (viewFilter === "Completed") return todo.completed;
+									if (viewFilter === "Pending") return !todo.completed;
+									return true; // for "All"
+								})
 								.filter((todo) => todo.text.includes(filter))
 								.map((filteredTodo, index) => (
 									<Draggable
