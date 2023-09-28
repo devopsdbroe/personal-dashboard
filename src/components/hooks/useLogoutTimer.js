@@ -1,7 +1,7 @@
 import { useEffect, useRef, useCallback } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
-const useLogoutTimer = (isLoggedIn, setIsLoggedIn, handleLogout) => {
+const useLogoutTimer = ({ isLoggedIn, setIsLoggedIn, handleLogout }) => {
 	const logoutTimerRef = useRef(null);
 
 	const resetTimer = useCallback(() => {

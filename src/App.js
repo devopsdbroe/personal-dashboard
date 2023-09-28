@@ -41,7 +41,7 @@ function App() {
 	};
 
 	// Custom hook that logs the user out after 5 minutes
-	useLogoutTimer(isLoggedIn, setIsLoggedIn, handleLogout);
+	useLogoutTimer({ isLoggedIn, setIsLoggedIn, handleLogout });
 
 	if (isLoading) {
 		return <div>Loading...</div>;
