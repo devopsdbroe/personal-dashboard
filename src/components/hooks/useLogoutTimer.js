@@ -10,7 +10,7 @@ const useLogoutTimer = ({ isLoggedIn, setIsLoggedIn, handleLogout }) => {
 		}
 
 		logoutTimerRef.current = setTimeout(handleLogout, 5 * 60 * 1000);
-	}, []);
+	}, [handleLogout]);
 
 	useEffect(() => {
 		const auth = getAuth();
@@ -36,7 +36,7 @@ const useLogoutTimer = ({ isLoggedIn, setIsLoggedIn, handleLogout }) => {
 				clearTimeout(logoutTimerRef.current);
 			}
 		};
-	}, [isLoggedIn, resetTimer]);
+	}, [isLoggedIn, setIsLoggedIn, resetTimer]);
 };
 
 export default useLogoutTimer;
