@@ -1,7 +1,9 @@
 import { initializeApp } from "firebase/app";
 
+const apiKey = process.env.REACT_APP_FIREBASE_API_KEY;
+
 const firebaseConfig = {
-	apiKey: "AIzaSyAXprhJ11IS-y2yhVuABoAAOuHLBDOf4Hk",
+	apiKey: apiKey,
 	authDomain: "react-chat-app-79450.firebaseapp.com",
 	projectId: "react-chat-app-79450",
 	storageBucket: "react-chat-app-79450.appspot.com",
