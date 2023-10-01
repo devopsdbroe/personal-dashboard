@@ -12,6 +12,8 @@ import ChatRoom from "./components/Dashboard/ChatRoom/ChatRoom";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./components/common/LanguageSwitcher";
 import CountdownTimer from "./components/Dashboard/CountdownTimer/CountdownTimer";
+import { DarkModeProvider } from "./contexts/DarkModeContext/DarkModeProvider";
+import DarkModeToggle from "./components/Dashboard/DarkModeToggle/DarkModeToggle";
 
 function App() {
 	const { t } = useTranslation();
@@ -72,12 +74,16 @@ function App() {
 				</div>
 			) : (
 				<div className='container'>
-					<ToDoList />
-					<RandomQuote />
-					<WeatherDashboard />
-					<ExpenseTracker />
-					<ChatRoom userEmail={isLoggedIn ? email : null} />
-					<CountdownTimer />
+					{/* TODO: Add dark mode functionality to all components */}
+					<DarkModeProvider>
+						<ToDoList />
+						<RandomQuote />
+						<WeatherDashboard />
+						<ExpenseTracker />
+						<ChatRoom userEmail={isLoggedIn ? email : null} />
+						<CountdownTimer />
+						<DarkModeToggle />
+					</DarkModeProvider>
 				</div>
 			)}
 		</div>
